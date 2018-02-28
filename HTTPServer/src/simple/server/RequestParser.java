@@ -9,6 +9,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 
+ * @author Hitesh Jolly
+ * 
+ *         Parses the received request from the input stream and breaks it down
+ *         to its components i.e. method, url and protocol
+ * 
+ */
+
 public class RequestParser {
 
 	private String method;

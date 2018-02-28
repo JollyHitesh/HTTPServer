@@ -7,6 +7,16 @@ import java.util.concurrent.Executors;
 
 import javax.net.ServerSocketFactory;
 
+/**
+ * 
+ * @author Hitesh Jolly
+ * 
+ *         Main class, defines the port number and the maximum thread count
+ *         receives the request and creates a server socket using the
+ *         {@ServerSocketFactory} passes on the received request to worker
+ *         threads to process
+ *
+ */
 public class Server implements Runnable {
 
 	private static final int port = 8080;
@@ -23,7 +33,7 @@ public class Server implements Runnable {
 			ServerSocket serverSocket = ServerSocketFactory.getDefault().createServerSocket(port);
 			ExecutorService fixedThreadPool = Executors.newFixedThreadPool(threadsLimit);
 			while (!Thread.interrupted()) {
-				fixedThreadPool.execute(new Thread(new Connection(serverSocket.accept(), this)));
+				fixedThreadPool.execute(new Thread(new Connection(serverSocket.accept())));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

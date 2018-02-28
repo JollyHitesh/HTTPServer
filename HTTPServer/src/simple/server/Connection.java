@@ -4,27 +4,24 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import simple.server.RequestParser.HttpMethod;
 import simple.server.Response.StatusCode;
 
+/**
+ * 
+ * @author Hitesh
+ * 
+ *         Thread class that reads the request, parses and writes the response
+ *
+ */
+
 public class Connection implements Runnable {
 
 	private Socket socket;
-	private Server server;
-	private String method;
-	private String url;
-	private String protocol;
-	private Map<String, String> headers = new HashMap<String, String>();
-	private List<String> body = new ArrayList<String>();
 
-	public Connection(Socket socket, Server server) {
+	public Connection(Socket socket) {
 		this.socket = socket;
-		this.server = server;
 	}
 
 	@Override
@@ -32,7 +29,6 @@ public class Connection implements Runnable {
 		try {
 			RequestParser parsedRequest = RequestParser.parseRequest(socket.getInputStream());
 			if (parsedRequest != null) {
-
 				System.out.println("Request for " + parsedRequest.getUrl() + " is being processed " + "by socket at "
 						+ socket.getInetAddress() + ":" + socket.getPort());
 
